@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Agent | y10.ai</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .agent-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 60px;
+            background: var(--background-gradient);
+            text-align: center;
+            position: relative;
+        }
+        .agent-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(102,126,234,0.15);
+            border: 4px solid var(--primary-color);
+            background: white;
+        }
+        .agent-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .agent-hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-color-dark);
+        }
+        .agent-hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color-medium);
+            margin-bottom: 32px;
+        }
+        .agent-chat-preview {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
+            max-width: 400px;
+            margin: 0 auto 48px;
+            padding: 24px 16px;
+            position: relative;
+        }
+        .agent-chat-bubble {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 20px 20px 20px 4px;
+            margin-bottom: 12px;
+            display: inline-block;
+            font-size: 1rem;
+            max-width: 80%;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+        }
+        .agent-chat-bubble.user {
+            background: #f0f4ff;
+            color: var(--primary-color);
+            border-radius: 20px 20px 4px 20px;
+            margin-left: 20%;
+        }
+        .agent-features {
+            padding: 60px 0 40px;
+            background: var(--background-color);
+        }
+        .agent-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .agent-feature-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
+            padding: 32px 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .agent-feature-card:hover {
+            transform: translateY(-6px) scale(1.03);
+        }
+        .agent-feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        .agent-feature-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-color-dark);
+        }
+        .agent-feature-desc {
+            color: var(--text-color-medium);
+            font-size: 1rem;
+        }
+        .agent-workflow {
+            background: var(--background-alt);
+            padding: 60px 0 40px;
+        }
+        .workflow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .workflow-step {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
+            padding: 32px 24px;
+            text-align: center;
+            width: 200px;
+        }
+        .workflow-step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 16px;
+        }
+        .workflow-step-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-color-dark);
+        }
+        .workflow-step-desc {
+            color: var(--text-color-medium);
+            font-size: 0.98rem;
+        }
+        .agent-testimonials {
+            background: var(--background-color);
+            padding: 60px 0 40px;
+        }
+        .agent-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .agent-testimonial-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .agent-testimonial-content {
+            font-size: 1.05rem;
+            color: var(--text-color-medium);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        .agent-testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .agent-testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
+        }
+        .agent-testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .agent-testimonial-info h4 {
+            font-weight: 700;
+            color: var(--text-color-dark);
+            margin-bottom: 2px;
+            font-size: 1rem;
+        }
+        .agent-testimonial-info span {
+            color: var(--text-color-medium);
+            font-size: 0.92rem;
+        }
+        .agent-cta {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: 60px 0 80px;
+        }
+        .agent-cta h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .agent-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+        .agent-cta .btn-primary {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+        @media (max-width: 700px) {
+            .workflow-steps { flex-direction: column; gap: 24px; }
+            .agent-features-grid, .agent-testimonials-grid, .showcase-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-robot"></i>
+                <span>y10.ai</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="#features">Features</a>
+                <a href="#workflow">Workflow</a>
+                <a href="#testimonials">Testimonials</a>
+                <button class="btn-primary">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="agent-hero">
+        <div class="agent-avatar">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Automation Agent Avatar">
+        </div>
+        <h1 class="agent-hero-title">Meet Your Automation Agent</h1>
+        <p class="agent-hero-subtitle">Delegate repetitive tasks to AI and focus on what matters. Your personal digital assistant is always ready to help.</p>
+        <div class="agent-chat-preview">
+            <div class="agent-chat-bubble">Hi! I’m your Automation Agent. How can I help you today?</div>
+            <div class="agent-chat-bubble user">Can you schedule a meeting for tomorrow at 2pm?</div>
+            <div class="agent-chat-bubble">Absolutely! Meeting scheduled for tomorrow at 2pm. Anything else?</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="agent-features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Can the Agent Do?</h2>
+                <p>Automate your workflow and save hours every week</p>
+            </div>
+            <div class="agent-features-grid">
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="agent-feature-title">Scheduling</div>
+                    <div class="agent-feature-desc">Book meetings, send invites, and manage your calendar automatically.</div>
+                </div>
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-database"></i></div>
+                    <div class="agent-feature-title">Data Entry</div>
+                    <div class="agent-feature-desc">Extract, organize, and input data into your favorite tools.</div>
+                </div>
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-bell"></i></div>
+                    <div class="agent-feature-title">Reminders</div>
+                    <div class="agent-feature-desc">Never miss a deadline with smart reminders and follow-ups.</div>
+                </div>
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-search"></i></div>
+                    <div class="agent-feature-title">Research</div>
+                    <div class="agent-feature-desc">Let the agent find information, summarize articles, and more.</div>
+                </div>
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <div class="agent-feature-title">Email Drafting</div>
+                    <div class="agent-feature-desc">Draft, send, and organize emails with a single command.</div>
+                </div>
+                <div class="agent-feature-card">
+                    <div class="agent-feature-icon"><i class="fas fa-tasks"></i></div>
+                    <div class="agent-feature-title">Task Automation</div>
+                    <div class="agent-feature-desc">Automate repetitive workflows and integrate with your apps.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="agent-workflow" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Get started in just a few simple steps</p>
+            </div>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="workflow-step-number">1</div>
+                    <div class="workflow-step-title">Connect</div>
+                    <div class="workflow-step-desc">Link your calendar, email, and favorite tools.</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">2</div>
+                    <div class="workflow-step-title">Configure</div>
+                    <div class="workflow-step-desc">Set your preferences and automation rules.</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">3</div>
+                    <div class="workflow-step-title">Delegate</div>
+                    <div class="workflow-step-desc">Tell the agent what to do—by chat or voice.</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">4</div>
+                    <div class="workflow-step-title">Relax</div>
+                    <div class="workflow-step-desc">Let the agent handle the busywork while you focus.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="agent-testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Users Say</h2>
+                <p>Real stories from professionals using the Automation Agent</p>
+            </div>
+            <div class="agent-testimonials-grid">
+                <div class="agent-testimonial-card">
+                    <div class="agent-testimonial-content">“The Automation Agent has saved me hours every week. Scheduling and reminders are now effortless!”</div>
+                    <div class="agent-testimonial-author">
+                        <div class="agent-testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Testimonial 1">
+                        </div>
+                        <div class="agent-testimonial-info">
+                            <h4>Jessica Lee</h4>
+                            <span>Executive Assistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="agent-testimonial-card">
+                    <div class="agent-testimonial-content">“I love how the agent can draft emails and automate my daily tasks. It’s like having a real assistant!”</div>
+                    <div class="agent-testimonial-author">
+                        <div class="agent-testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Testimonial 2">
+                        </div>
+                        <div class="agent-testimonial-info">
+                            <h4>Michael Chen</h4>
+                            <span>Product Manager</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="agent-testimonial-card">
+                    <div class="agent-testimonial-content">“The research and data entry features are a game changer for my workflow. Highly recommended!”</div>
+                    <div class="agent-testimonial-author">
+                        <div class="agent-testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Testimonial 3">
+                        </div>
+                        <div class="agent-testimonial-info">
+                            <h4>Priya Patel</h4>
+                            <span>Data Analyst</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="agent-cta">
+        <div class="container">
+            <h2>Ready to Supercharge Your Productivity?</h2>
+            <p>Try the Automation Agent today and experience the future of work.</p>
+            <button class="btn-primary"><i class="fas fa-rocket"></i> Try the Agent</button>
+        </div>
+    </section>
+
+</body>
+</html> 
